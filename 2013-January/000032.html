@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pythonwifi-dev] What about pythonwifi behind a proxy like	Squid3 ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pythonwifi-dev/2013-January/index.html" >
+   <LINK REL="made" HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20What%20about%20pythonwifi%20behind%20a%20proxy%20like%0A%09Squid3%20%3F&In-Reply-To=%3CCAM6f8QBq6W-T6BuXKqjqGOQxp8GjoF8o%3D4voi2J_9V-ZJyc8JQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000031.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pythonwifi-dev] What about pythonwifi behind a proxy like	Squid3 ?</H1>
+    <B>Sean Robinson</B> 
+    <A HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20What%20about%20pythonwifi%20behind%20a%20proxy%20like%0A%09Squid3%20%3F&In-Reply-To=%3CCAM6f8QBq6W-T6BuXKqjqGOQxp8GjoF8o%3D4voi2J_9V-ZJyc8JQ%40mail.gmail.com%3E"
+       TITLE="[Pythonwifi-dev] What about pythonwifi behind a proxy like	Squid3 ?">seankrobinson at gmail.com
+       </A><BR>
+    <I>Sat Jan 26 15:30:51 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000031.html">[Pythonwifi-dev] What about pythonwifi behind a proxy like Squid3 ?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jan 10, 2013 at 7:33 AM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">sriliam at free.fr</A>&gt; wrote:
+
+&gt;<i>
+</I>&gt;<i> All is in title : how can I manage a wifi connection through my squid3
+</I>&gt;<i> proxy ?
+</I>&gt;<i> Best regards.
+</I>&gt;<i> Sril
+</I>&gt;<i>
+</I>
+Python WiFi (PW) only provides access to the kernel management of WiFi
+devices.  So, PW does not do what I guess you want.  But, you could write a
+network app that used PW to handle WiFi hardware on the app host.
+
+What I am picturing:
+
+WNIC &lt;--&gt; PW &lt;--&gt; CoolPythonApp &lt;--&gt; network &lt;--&gt; client
+
+PW only handles the first two items on the left.  Everything to the right
+is outside the scope of PW.
+
+-- 
+Sean Robinson
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pythonwifi-dev/attachments/20130126/a9fa771f/attachment.html">https://lists.berlios.de/pipermail/pythonwifi-dev/attachments/20130126/a9fa771f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000031.html">[Pythonwifi-dev] What about pythonwifi behind a proxy like Squid3 ?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">More information about the Pythonwifi-dev
+mailing list</a><br>
+</body></html>

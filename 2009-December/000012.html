@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pythonwifi-dev] [Bug #16210] OverflowError when trying to perform	scan()
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pythonwifi-dev/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20%5BBug%20%2316210%5D%20OverflowError%20when%20trying%20to%20perform%0A%09scan%28%29&In-Reply-To=%3C200912211436.nBLEaQZB027804%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000011.html">
+   <LINK REL="Next"  HREF="000014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pythonwifi-dev] [Bug #16210] OverflowError when trying to perform	scan()</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20%5BBug%20%2316210%5D%20OverflowError%20when%20trying%20to%20perform%0A%09scan%28%29&In-Reply-To=%3C200912211436.nBLEaQZB027804%40unicorn.berlios.de%3E"
+       TITLE="[Pythonwifi-dev] [Bug #16210] OverflowError when trying to perform	scan()">admin at berlios.de
+       </A><BR>
+    <I>Mon Dec 21 15:36:26 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000011.html">[Pythonwifi-dev] [Bug #16045] PKG-INFO is not utf8 encoded
+</A></li>
+        <LI>Next message: <A HREF="000014.html">[Pythonwifi-dev] Python WiFi bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #16210, was updated on 2009-Sep-02 10:27
+Here is a current snapshot of the bug.
+
+Project: Python-WIFI
+Category: iwlibs
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: riskable
+Assigned to : none
+Summary: OverflowError when trying to perform scan()
+
+Details: I just downloaded python-wiif to play around with and immediately encountered this error:
+
+In [2]: iwlibs.getNICnames()
+Out[2]: ['wlan0']           
+
+In [3]: ifobj = iwlibs.Wireless('wlan0')
+
+...
+
+
+In [14]: ifobj.scan()
+---------------------------------------------------------------------------
+OverflowError                             Traceback (most recent call last)
+
+/root/&lt;ipython console&gt; in &lt;module&gt;()
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in scan(self)
+    408         &quot;&quot;&quot;returns Iwscanresult objects, after a successful scan&quot;&quot;&quot;                           
+    409         iwscan = Iwscan(self.ifname)                                                          
+--&gt; 410         return iwscan.scan()                                                                  
+    411                                                                                               
+    412                                                                                               
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in scan(self, fullscan)
+    968         while (result &gt; 0):
+    969             time.sleep(result/1000)
+--&gt; 970             result = self.getScan()
+    971
+    972         if result &lt; 0 or self.errorflag != 0:
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in getScan(self)
+   1020         if reslen &gt; 0:
+   1021             # Initialize the stream, and turn it into an enumerator
+
+-&gt; 1022             self.aplist = self._parse(buff.tostring())
+   1023             return 0
+   1024
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in _parse(self, data)
+   1054             else:
+   1055                 scanresult.addEvent(cmd,
+-&gt; 1056                                     data[pythonwifi.flags.IW_EV_LCP_LEN:length])
+   1057
+   1058             # We're finished with the preveious event
+
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in addEvent(self, cmd, data)
+   1119             self.quality.parse(data)
+   1120         elif cmd == pythonwifi.flags.SIOCGIWFREQ:
+-&gt; 1121             self.frequency = Iwfreq(data)
+   1122         elif cmd == pythonwifi.flags.SIOCGIWENCODE:
+   1123             self.encode = data
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in __init__(self, data)
+    575         self.fmt = &quot;ihbb&quot;
+    576         if data is not None:
+--&gt; 577             self.frequency = self.parse(data)
+    578         else:
+    579             self.frequency = 0
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in parse(self, data)
+    592             return m
+    593         else:
+--&gt; 594             return float(m)*10**e
+    595
+    596     def getFrequency(self):
+
+OverflowError: long int too large to convert to float
+
+Could be that I'm on a 64-bit system.  I dunno.
+
+Follow-Ups:
+
+Date: 2009-Dec-21 09:36
+By: riskable
+
+Comment:
+I just checked out the latest code from git and it appears that the problem is fixed:
+
+In [21]: ifobj = Wireless('wlan0')
+
+In [22]: ifobj.getWirelessName()
+Out[22]: 'IEEE 802.11abgn'
+
+This ticket can be closed.
+-------------------------------------------------------
+
+Date: 2009-Nov-02 14:37
+By: xkill
+
+Comment:
+I have the same problem:
+
+In [1]: from pythonwifi.iwlibs import Wireless, getNICnames
+
+In [2]: wifi = Wireless('wlan0')
+
+In [3]: wifi.scan()
+---------------------------------------------------------------------------
+OverflowError                             Traceback (most recent call last)
+
+/usr/local/src/python-wifi-0.3.1/examples/&lt;ipython console&gt; in &lt;module&gt;()
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in scan(self)
+    408         &quot;&quot;&quot;returns Iwscanresult objects, after a successful scan&quot;&quot;&quot;
+    409         iwscan = Iwscan(self.ifname)
+--&gt; 410         return iwscan.scan()
+    411 
+    412 
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in scan(self, fullscan)
+    968         while (result &gt; 0):
+    969             time.sleep(result/1000)
+--&gt; 970             result = self.getScan()
+    971 
+    972         if result &lt; 0 or self.errorflag != 0:
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in getScan(self)
+   1020         if reslen &gt; 0:
+   1021             # Initialize the stream, and turn it into an enumerator
+
+-&gt; 1022             self.aplist = self._parse(buff.tostring())
+   1023             return 0
+   1024 
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in _parse(self, data)
+   1054             else:
+   1055                 scanresult.addEvent(cmd,
+-&gt; 1056                                     data[pythonwifi.flags.IW_EV_LCP_LEN:length])
+   1057 
+   1058             # We're finished with the preveious event
+
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in addEvent(self, cmd, data)
+   1119             self.quality.parse(data)
+   1120         elif cmd == pythonwifi.flags.SIOCGIWFREQ:
+-&gt; 1121             self.frequency = Iwfreq(data)
+   1122         elif cmd == pythonwifi.flags.SIOCGIWENCODE:
+   1123             self.encode = data
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in __init__(self, data)
+    575         self.fmt = &quot;ihbb&quot;
+    576         if data is not None:
+--&gt; 577             self.frequency = self.parse(data)
+    578         else:
+    579             self.frequency = 0
+
+/usr/local/lib/python2.6/dist-packages/python_wifi-0.3.1-py2.6.egg/pythonwifi/iwlibs.pyc in parse(self, data)
+    592             return m
+    593         else:
+--&gt; 594             return float(m)*10**e
+    595 
+    596     def getFrequency(self):
+
+OverflowError: long int too large to convert to float
+
+
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16210&amp;group_id=7134">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16210&amp;group_id=7134</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000011.html">[Pythonwifi-dev] [Bug #16045] PKG-INFO is not utf8 encoded
+</A></li>
+	<LI>Next message: <A HREF="000014.html">[Pythonwifi-dev] Python WiFi bugs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">More information about the Pythonwifi-dev
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pythonwifi-dev] iwlist.py decoding error on 64bit laptop
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pythonwifi-dev/2013-June/index.html" >
+   <LINK REL="made" HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20iwlist.py%20decoding%20error%20on%2064bit%20laptop&In-Reply-To=%3CCAEk6gTB5BisTOKLiHT2ZSU24OT4xS_7YwcBMMrFMi4Mhk9bg%2BA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000034.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pythonwifi-dev] iwlist.py decoding error on 64bit laptop</H1>
+    <B>Drasko DRASKOVIC</B> 
+    <A HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20iwlist.py%20decoding%20error%20on%2064bit%20laptop&In-Reply-To=%3CCAEk6gTB5BisTOKLiHT2ZSU24OT4xS_7YwcBMMrFMi4Mhk9bg%2BA%40mail.gmail.com%3E"
+       TITLE="[Pythonwifi-dev] iwlist.py decoding error on 64bit laptop">drasko.draskovic at gmail.com
+       </A><BR>
+    <I>Wed Jun 12 17:33:45 CEST 2013</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000034.html">[Pythonwifi-dev] iwlist.py decoding error on 64bit laptop
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#33">[ date ]</a>
+              <a href="thread.html#33">[ thread ]</a>
+              <a href="subject.html#33">[ subject ]</a>
+              <a href="author.html#33">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+I have just git cloned master, and I am seeing following error on my
+ASUS X20E1 laptop :
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">root at Mali</A>:/home/drasko/pythonwifi/examples# python iwlist.py wlan0 scanning
+wlan0     Scan completed :
+          Cell 01 - Address: 00:00:01:00:5C:96
+                    ESSID:&quot;
+D-Dev Team&quot;
+                    Mode:Auto
+                    Frequency:2.472 GHz (Channel 13)
+                    Quality:0/70  Signal level:0/100  Noise level:0/100
+Traceback (most recent call last):
+  File &quot;iwlist.py&quot;, line 555, in &lt;module&gt;
+    main()
+  File &quot;iwlist.py&quot;, line 548, in main
+    list_command(wifi, sys.argv[3:])
+  File &quot;iwlist.py&quot;, line 98, in print_scanning_results
+    print &quot;                    Encryption key:%s&quot; % (key_status, )
+UnboundLocalError: local variable 'key_status' referenced before assignment
+
+`lspci` shows me this WiFi NIC :
+ Network controller: Qualcomm Atheros AR9485 Wireless Network Adapter (rev 01)
+
+And Python and Linux versions are following :
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">root at Mali</A>:/home/drasko/pythonwifi/examples# python
+Python 2.7.5 (default, May 20 2013, 11:51:12)
+[GCC 4.7.3] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;<i>
+</I>
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">root at Mali</A>:/home/drasko/pythonwifi/examples# uname -a
+Linux Mali 3.2.0-4-amd64 #1 SMP Debian 3.2.41-2+deb7u2 x86_64 GNU/Linux
+
+I think that it might be iwlibs error, probably something related to
+mapping in Python structures.
+
+Native Linux' iwlist wlan0 scanning works just fine, and the I have
+not seen any problem with wireless driver.
+
+Same python-wifi code seem to work on other laptop and on Pandaboard
+(OMAP4 chip).
+
+Where can I look for correcting this problem?
+
+Best regards,
+Drasko
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000034.html">[Pythonwifi-dev] iwlist.py decoding error on 64bit laptop
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#33">[ date ]</a>
+              <a href="thread.html#33">[ thread ]</a>
+              <a href="subject.html#33">[ subject ]</a>
+              <a href="author.html#33">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">More information about the Pythonwifi-dev
+mailing list</a><br>
+</body></html>

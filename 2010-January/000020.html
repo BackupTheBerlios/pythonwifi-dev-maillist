@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pythonwifi-dev] Channel support for iwlibs.Wireless
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pythonwifi-dev/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20Channel%20support%20for%20iwlibs.Wireless&In-Reply-To=%3C4B4331B2.4090800%40inf.fu-berlin.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000018.html">
+   <LINK REL="Next"  HREF="000019.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pythonwifi-dev] Channel support for iwlibs.Wireless</H1>
+    <B>Matthias Philipp</B> 
+    <A HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20Channel%20support%20for%20iwlibs.Wireless&In-Reply-To=%3C4B4331B2.4090800%40inf.fu-berlin.de%3E"
+       TITLE="[Pythonwifi-dev] Channel support for iwlibs.Wireless">mphilipp at inf.fu-berlin.de
+       </A><BR>
+    <I>Tue Jan  5 13:33:54 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000018.html">[Pythonwifi-dev] Channel support for iwlibs.Wireless
+</A></li>
+        <LI>Next message: <A HREF="000019.html">[Pythonwifi-dev] Licenese of the logos for debian package
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+&gt;<i> 1) Do you need direct access to freq2channel() and channel2freq() or are
+</I>&gt;<i> these just helpers for Wireless.getChannel() and Wireless.setChannel()?  If
+</I>&gt;<i> they are not meant to used directly, I think I will put them under the
+</I>&gt;<i> Wireless class.
+</I>
+I don't need direct access to these functions. However it would be 
+interesting if one could directly convert channels to frequencies and 
+vice versa. But since freq2channel() and channel2freq() also need the 
+iwrange parameter, I have no objections to putting them under the 
+Wireless class.
+
+&gt;<i> 2) The changes to Wireless.setFrequency() are to allow non-string values?
+</I>&gt;<i> Is this needed?  Aren't strings good enough?
+</I>
+When I played around with python-wifi it took me some time to figure out 
+  which format is supported by the setFrequency() method. Finally I had 
+to look in the source code. Therefore the changes should allow to use it 
+more intuitively on the one hand. On the other hand, setChannel() needs 
+to set the frequency as int or long.
+
+&gt;<i> 3) Iwrange.iwfreqs is a list of frequencies.  Does Iwrange.frequencies not
+</I>&gt;<i> serve your needs?
+</I>
+Iwrange.frequencies is a list of frequencies and Iwrange.iwfreqs is a 
+list of Iwfreq objects. I need Iwfreq objects because these hold the 
+relationship between channel (Iwfreq.index) and frequency 
+(Iwfreq.getFrequency())
+
+Best regards, Matthias
+
+-- 
+<A HREF="http://www.des-testbed.net/">http://www.des-testbed.net/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000018.html">[Pythonwifi-dev] Channel support for iwlibs.Wireless
+</A></li>
+	<LI>Next message: <A HREF="000019.html">[Pythonwifi-dev] Licenese of the logos for debian package
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">More information about the Pythonwifi-dev
+mailing list</a><br>
+</body></html>

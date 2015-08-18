@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pythonwifi-dev] Channel support for iwlibs.Wireless
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pythonwifi-dev/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20Channel%20support%20for%20iwlibs.Wireless&In-Reply-To=%3C4AF30B82.7020704%40inf.fu-berlin.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pythonwifi-dev] Channel support for iwlibs.Wireless</H1>
+    <B>Matthias Philipp</B> 
+    <A HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20Channel%20support%20for%20iwlibs.Wireless&In-Reply-To=%3C4AF30B82.7020704%40inf.fu-berlin.de%3E"
+       TITLE="[Pythonwifi-dev] Channel support for iwlibs.Wireless">mphilipp at inf.fu-berlin.de
+       </A><BR>
+    <I>Thu Nov  5 18:29:38 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[Pythonwifi-dev] [Bug #16210] OverflowError when trying to perform	scan()
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[Pythonwifi-dev] Python egg help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I extended Python WiFi to support channels.
+
+Basically I added the methods getChannel() and setChannel(channel) to
+the Wireless class and translated the functions iw_freq_to_channel and
+iw_channel_to_freq from iwlib to python.
+
+The corresponding diff is attached to this email. Feel free to
+incorporate the changes into the module.
+
+Best regards,
+Matthias Philipp
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: iwlibs.py.diff
+Type: text/x-patch
+Size: 6657 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pythonwifi-dev/attachments/20091105/1e2b67c0/attachment.bin">https://lists.berlios.de/pipermail/pythonwifi-dev/attachments/20091105/1e2b67c0/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[Pythonwifi-dev] [Bug #16210] OverflowError when trying to perform	scan()
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[Pythonwifi-dev] Python egg help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">More information about the Pythonwifi-dev
+mailing list</a><br>
+</body></html>

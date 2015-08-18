@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pythonwifi-dev] [Bug #16396] pyiwlist doesn't work
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pythonwifi-dev/2009-November/index.html" >
+   <LINK REL="made" HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20%5BBug%20%2316396%5D%20pyiwlist%20doesn%27t%20work&In-Reply-To=%3C200911021934.nA2JYIaW019793%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000005.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pythonwifi-dev] [Bug #16396] pyiwlist doesn't work</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20%5BBug%20%2316396%5D%20pyiwlist%20doesn%27t%20work&In-Reply-To=%3C200911021934.nA2JYIaW019793%40unicorn.berlios.de%3E"
+       TITLE="[Pythonwifi-dev] [Bug #16396] pyiwlist doesn't work">admin at berlios.de
+       </A><BR>
+    <I>Mon Nov  2 20:34:18 CET 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000005.html">[Pythonwifi-dev] [Bug #16210] OverflowError when trying to perform	scan()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #16396, was updated on 2009-Nov-02 20:34
+Here is a current snapshot of the bug.
+
+Project: Python-WIFI
+Category: tests
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: xkill
+Assigned to : none
+Summary: pyiwlist doesn't work
+
+Details: Hello,
+
+I'm trying pyiwlist.py (from python-wifi-0.3.1.tar.gz) to test the libraries, but it doesn't work:
+
+# ./pyiwlist.py wlan0 scanning
+Traceback (most recent call last):
+  File &quot;./pyiwlist.py&quot;, line 103, in &lt;module&gt;
+    main()
+  File &quot;./pyiwlist.py&quot;, line 87, in main
+    print_scanning_results(wifi)
+  File &quot;./pyiwlist.py&quot;, line 24, in print_scanning_results
+    for results in wifi.scan():
+  File &quot;build/bdist.linux-x86_64/egg/pythonwifi/iwlibs.py&quot;, line 410, in scan
+  File &quot;build/bdist.linux-x86_64/egg/pythonwifi/iwlibs.py&quot;, line 970, in scan
+  File &quot;build/bdist.linux-x86_64/egg/pythonwifi/iwlibs.py&quot;, line 1022, in getScan
+  File &quot;build/bdist.linux-x86_64/egg/pythonwifi/iwlibs.py&quot;, line 1056, in _parse
+  File &quot;build/bdist.linux-x86_64/egg/pythonwifi/iwlibs.py&quot;, line 1121, in addEvent
+  File &quot;build/bdist.linux-x86_64/egg/pythonwifi/iwlibs.py&quot;, line 577, in __init__
+  File &quot;build/bdist.linux-x86_64/egg/pythonwifi/iwlibs.py&quot;, line 594, in parse
+OverflowError: long int too large to convert to float
+
+
+I have this Wireless card:
+# lspci -vv
+14:00.0 Ethernet controller: Atheros Communications Inc. AR242x 802.11abg Wireless PCI Express Adapter (rev 04)
+        Subsystem: Atheros Communications Inc. Device 3067
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR+ FastB2B- DisINTx-
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast &gt;TAbort- &lt;TAbort- &lt;MAbort- &gt;SERR- &lt;PERR- INTx-
+        Latency: 0, Cache Line Size: 64 bytes
+        Interrupt: pin A routed to IRQ 19
+        Region 0: Memory at fe200000 (64-bit, non-prefetchable) [size=64K]
+        Capabilities: [40] Power Management version 2
+                Flags: PMEClk- DSI- D1- D2- AuxCurrent=375mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+                Status: D0 PME-Enable- DSel=0 DScale=0 PME-
+        Capabilities: [50] Message Signalled Interrupts: Mask- 64bit- Queue=0/0 Enable-
+                Address: 00000000  Data: 0000
+        Capabilities: [60] Express (v1) Legacy Endpoint, MSI 00
+                DevCap: MaxPayload 128 bytes, PhantFunc 0, Latency L0s &lt;512ns, L1 &lt;64us
+                        ExtTag- AttnBtn- AttnInd- PwrInd- RBE- FLReset-
+                DevCtl: Report errors: Correctable- Non-Fatal- Fatal- Unsupported-
+                        RlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop-
+                        MaxPayload 128 bytes, MaxReadReq 512 bytes
+                DevSta: CorrErr- UncorrErr+ FatalErr- UnsuppReq+ AuxPwr- TransPend-
+                LnkCap: Port #0, Speed 2.5GT/s, Width x1, ASPM L0s L1, Latency L0 &lt;512ns, L1 &lt;64us
+                        ClockPM- Suprise- LLActRep- BwNot-
+                LnkCtl: ASPM L1 Enabled; RCB 128 bytes Disabled- Retrain- CommClk+
+                        ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
+                LnkSta: Speed 2.5GT/s, Width x1, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+        Capabilities: [90] MSI-X: Enable- Mask- TabSize=1
+                Vector table: BAR=0 offset=00000000
+                PBA: BAR=0 offset=00000000
+        Capabilities: [100] Advanced Error Reporting &lt;?&gt;
+        Capabilities: [140] Virtual Channel &lt;?&gt;
+        Kernel driver in use: ath5k
+        Kernel modules: ath5k, ath_pci
+
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16396&amp;group_id=7134">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=16396&amp;group_id=7134</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000005.html">[Pythonwifi-dev] [Bug #16210] OverflowError when trying to perform	scan()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">More information about the Pythonwifi-dev
+mailing list</a><br>
+</body></html>

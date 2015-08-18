@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pythonwifi-dev] Channel support for iwlibs.Wireless
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pythonwifi-dev/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20Channel%20support%20for%20iwlibs.Wireless&In-Reply-To=%3C9ddeaee51001021314m2abb6be4rb49a378bde542201%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000020.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pythonwifi-dev] Channel support for iwlibs.Wireless</H1>
+    <B>Sean Robinson</B> 
+    <A HREF="mailto:pythonwifi-dev%40lists.berlios.de?Subject=Re%3A%20%5BPythonwifi-dev%5D%20Channel%20support%20for%20iwlibs.Wireless&In-Reply-To=%3C9ddeaee51001021314m2abb6be4rb49a378bde542201%40mail.gmail.com%3E"
+       TITLE="[Pythonwifi-dev] Channel support for iwlibs.Wireless">seankrobinson at gmail.com
+       </A><BR>
+    <I>Sat Jan  2 22:14:36 CET 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000020.html">[Pythonwifi-dev] Channel support for iwlibs.Wireless
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#18">[ date ]</a>
+              <a href="thread.html#18">[ thread ]</a>
+              <a href="subject.html#18">[ subject ]</a>
+              <a href="author.html#18">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>  Thank you for re-submitting your patch.  I have been attempting to
+integrate it and I have some questions that came up in the process.
+
+1) Do you need direct access to freq2channel() and channel2freq() or are
+these just helpers for Wireless.getChannel() and Wireless.setChannel()?  If
+they are not meant to used directly, I think I will put them under the
+Wireless class.
+
+2) The changes to Wireless.setFrequency() are to allow non-string values?
+Is this needed?  Aren't strings good enough?
+
+3) Iwrange.iwfreqs is a list of frequencies.  Does Iwrange.frequencies not
+serve your needs?
+
+
+On Wed, Dec 23, 2009 at 1:39 AM, Matthias Philipp &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">mphilipp at inf.fu-berlin.de</A>
+&gt;<i> wrote:
+</I>
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I attached the patch in correct format. I would be happy to see it
+</I>&gt;<i> integrated in pythonwifi.
+</I>&gt;<i>
+</I>&gt;<i> Best regards and merry Christmas,
+</I>&gt;<i> Matthias
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 12/22/2009 11:15 PM, Sean Robinson wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i>  Thank you for your contribution.  I looked at adding your code, but there
+</I>&gt;&gt;<i> was not enough context for me to get a successful patch of all the hunks.
+</I>&gt;&gt;<i> Could you re-diff using -u (unified diff)?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Thu, Nov 5, 2009 at 10:29 AM, Matthias Philipp &lt;
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">mphilipp at inf.fu-berlin.de</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> wrote:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>  Hello,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I extended Python WiFi to support channels.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Basically I added the methods getChannel() and setChannel(channel) to
+</I>&gt;&gt;&gt;<i> the Wireless class and translated the functions iw_freq_to_channel and
+</I>&gt;&gt;&gt;<i> iw_channel_to_freq from iwlib to python.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> The corresponding diff is attached to this email. Feel free to
+</I>&gt;&gt;&gt;<i> incorporate the changes into the module.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Best regards,
+</I>&gt;&gt;&gt;<i> Matthias Philipp
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> Pythonwifi-dev mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">Pythonwifi-dev at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">https://lists.berlios.de/mailman/listinfo/pythonwifi-dev</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> <A HREF="http://www.des-testbed.net/">http://www.des-testbed.net/</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+Sean Robinson
+WiFi Radar - <A HREF="http://wifi-radar.berlios.de">http://wifi-radar.berlios.de</A>
+Python WiFi - <A HREF="http://pythonwifi.wikispot.org">http://pythonwifi.wikispot.org</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pythonwifi-dev/attachments/20100102/ef02d15c/attachment.html">https://lists.berlios.de/pipermail/pythonwifi-dev/attachments/20100102/ef02d15c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000020.html">[Pythonwifi-dev] Channel support for iwlibs.Wireless
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#18">[ date ]</a>
+              <a href="thread.html#18">[ thread ]</a>
+              <a href="subject.html#18">[ subject ]</a>
+              <a href="author.html#18">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pythonwifi-dev">More information about the Pythonwifi-dev
+mailing list</a><br>
+</body></html>
